@@ -29,7 +29,7 @@ const Dashboard = () => {
               Sector Registration
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Register for Qirat, Charity, or Dawa programs
+              Register for Qirat, Charity, or Da'wah programs
             </p>
           </div>
 
@@ -55,7 +55,7 @@ const Dashboard = () => {
                 className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
               >
                 <Users className="h-4 w-4" />
-                <span className="hidden sm:inline">Dawa</span>
+                <span className="hidden sm:inline">Da'wah</span>
               </TabsTrigger>
             </TabsList>
 

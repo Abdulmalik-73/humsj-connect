@@ -8,7 +8,7 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "Qirat", path: "/qirat", icon: BookOpen },
   { name: "Charity", path: "/charity", icon: Heart },
-  { name: "Dawa", path: "/dawa", icon: Users },
+  { name: "Da'wah", path: "/dawa", icon: Users },
   { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
   { name: "Admin", path: "/admin", icon: Shield },
 ];

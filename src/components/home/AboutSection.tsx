@@ -18,21 +18,18 @@ const AboutSection = () => {
           {/* Left Content */}
           <div className="space-y-6">
             <h3 className="font-serif text-2xl font-semibold text-foreground">
-              The Bridge Between Jema & Community
+              The Bridge Between Jemea & Community
             </h3>
             
             <p className="text-muted-foreground leading-relaxed">
               The External Affairs Sector of HUMSJ serves as the vital link connecting our student 
-              Jema with the broader university community and beyond. Established with the mission 
+              Jemea with the broader university community and beyond. Established with the mission 
               of fostering understanding and cooperation, we work tirelessly to represent our 
               values while engaging constructively with all stakeholders.
             </p>
             
             <p className="text-muted-foreground leading-relaxed">
-              Through our three specialized sub-sectors—Qirat, Charity, and Dawa—we address 
-              diverse aspects of community engagement. From Quranic education to humanitarian 
-              support and Islamic outreach, our comprehensive approach ensures that the light 
-              of Islamic knowledge and compassion reaches every corner of our campus and community.
+              Through our three specialized sub-sectors Qirat, Charity, and Da'wah we address diverse aspects of community engagement. From Quranic education to humanitarian support and Islamic outreach, our comprehensive approach ensures that the light of Islamic knowledge and compassion reaches every corner of our campus and community.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
@@ -105,7 +102,7 @@ const AboutSection = () => {
                 <div className="pb-6">
                   <span className="text-sm font-medium text-primary">2015</span>
                   <h4 className="font-semibold text-foreground">Sub-Sector Formation</h4>
-                  <p className="text-sm text-muted-foreground">Qirat, Charity, and Dawa sectors formally organized</p>
+                  <p className="text-sm text-muted-foreground">Qirat, Charity, and Da'wah sectors formally organized</p>
                 </div>
               </div>
               

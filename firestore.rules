@@ -23,7 +23,7 @@ service cloud.firestore {
       allow update, delete: if false;
     }
     
-    // Dawa Sector Registrations
+    // Da'wah Sector Registrations
     match /registrations_dawa/{document=**} {
       // Anyone can create (register)
       allow create: if true;

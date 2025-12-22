@@ -20,7 +20,7 @@ const sectors = [
     path: "/charity",
   },
   {
-    title: "Dawa Sector",
+    title: "Da'wah Sector",
     description: "Committed to Islamic outreach and invitation, spreading the message of Islam through education, dialogue, and community engagement.",
     icon: Users,
     image: dawaImage,

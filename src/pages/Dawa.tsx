@@ -9,7 +9,7 @@ import dawaImage from "@/assets/dawa-outreach.jpg";
 const timelineEvents = [
   {
     year: "2013",
-    title: "Dawa Sector Inception",
+    title: "Da'wah Sector Inception",
     description: "Formed to spread Islamic knowledge and engage in interfaith dialogue."
   },
   {
@@ -29,7 +29,7 @@ const timelineEvents = [
   },
   {
     year: "2023",
-    title: "Digital Dawa Launch",
+    title: "Digital Da'wah Launch",
     description: "Expanded outreach through social media and online content."
   }
 ];
@@ -37,7 +37,7 @@ const timelineEvents = [
 const Dawa = () => {
   return (
     <SectorLayout
-      title="Dawa Sector"
+      title="Da'wah Sector"
       subtitle="Inviting to the Path of Truth & Understanding"
       heroImage={dawaImage}
     >
@@ -49,12 +49,12 @@ const Dawa = () => {
             <section className="bg-card rounded-xl p-8 shadow-elegant">
               <h2 className="font-serif text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
                 <Users className="h-6 w-6 text-accent" />
-                About Dawa Sector
+                About Da'wah Sector
               </h2>
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  The Dawa Sector is committed to sharing the beauty and truth of Islam through 
+                  The Da'wah Sector is committed to sharing the beauty and truth of Islam through 
                   education, dialogue, and community engagement. We believe in the prophetic 
                   tradition of inviting others to the path of Allah with wisdom and beautiful 
                   preaching. Our approach emphasizes understanding, respect, and genuine care 

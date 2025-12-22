@@ -14,11 +14,11 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="font-serif font-bold text-lg">HUMSJ External Affairs</h3>
-                <p className="text-sm text-primary-foreground/70">Haramaya University Muslim Student Jema</p>
+                <p className="text-sm text-primary-foreground/70">Haramaya University Muslim Student Jemea</p>
               </div>
             </div>
             <p className="text-sm text-primary-foreground/80 max-w-md">
-              Building bridges between the Jema and the community through Qirat, Charity, and Dawa initiatives.
+              Building bridges between the Jemea and the community through Qirat, Charity, and Da'wah initiatives.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ const Footer = () => {
               <Link to="/" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Home</Link>
               <Link to="/qirat" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Qirat Sector</Link>
               <Link to="/charity" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Charity Sector</Link>
-              <Link to="/dawa" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Dawa Sector</Link>
+              <Link to="/dawa" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Da'wah Sector</Link>
               <Link to="/dashboard" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">Dashboard</Link>
             </nav>
           </div>

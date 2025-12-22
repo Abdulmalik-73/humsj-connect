@@ -63,7 +63,7 @@ const sectorConfig: Record<
     options: [
       { value: "new", label: "New - First time volunteer" },
       { value: "some", label: "Some Experience" },
-      { value: "experienced", label: "Experienced in Dawa" },
+      { value: "experienced", label: "Experienced in Da'wah" },
       { value: "trainer", label: "Can train others" },
     ],
   },

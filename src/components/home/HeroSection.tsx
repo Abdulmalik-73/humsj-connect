@@ -21,7 +21,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl">
           <div className="inline-block px-4 py-2 bg-accent/20 rounded-full mb-6 animate-fade-in">
-            <span className="text-accent font-medium text-sm">Haramaya University Muslim Student Jema</span>
+            <span className="text-accent font-medium text-sm">Haramaya University Muslim Student Jemea</span>
           </div>
           
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
@@ -30,7 +30,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            Building bridges between the Jema and the broader community through education, 
+            Building bridges between the Jemea and the broader community through education, 
             charity, and outreach. Serving students and society with Islamic values.
           </p>
           
