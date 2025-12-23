@@ -99,8 +99,8 @@ const Qirat = () => {
           <div className="space-y-6">
             {/* Amir Profile */}
             <AmirProfile
-              name="Sheikh Ahmed Yusuf"
-              phone="+251 912 345 001"
+              name="Mohammed Ahmadu"
+              phone="+251 929 230 120"
               email="qirat.amir@humsj.edu.et"
             />
 

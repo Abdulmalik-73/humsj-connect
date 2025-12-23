@@ -100,8 +100,8 @@ const Dawa = () => {
           <div className="space-y-6">
             {/* Amir Profile */}
             <AmirProfile
-              name="Brother Abdulaziz Hassan"
-              phone="+251 912 345 003"
+              name="Ramadan Aliyii"
+              phone="+251 975 309 779"
               email="dawa.amir@humsj.edu.et"
             />
 

@@ -112,15 +112,19 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    font-family: Amiri, serif;
   }
 }
 
@@ -145,8 +149,10 @@
   }
 
   .card-elevated {
-    @apply bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+    background-color: hsl(var(--card));
+    border-radius: 0.75rem;
     box-shadow: var(--shadow-md);
+    transition: all 0.3s;
   }
 
   .card-elevated:hover {
@@ -155,7 +161,12 @@
   }
 
   .btn-gold {
-    @apply bg-accent text-accent-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
     box-shadow: var(--shadow-gold);
   }
 
@@ -165,7 +176,12 @@
   }
 
   .section-divider {
-    @apply w-24 h-1 mx-auto rounded-full bg-accent;
+    width: 6rem;
+    height: 0.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9999px;
+    background-color: hsl(var(--accent));
   }
 }
 

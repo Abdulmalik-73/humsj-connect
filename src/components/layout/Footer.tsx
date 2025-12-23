@@ -37,14 +37,22 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="font-serif font-semibold text-lg mb-4 text-accent">Contact</h4>
-            <div className="flex flex-col gap-3">
-              <a href="mailto:humsj@haramaya.edu.et" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent transition-colors">
-                <Mail className="h-4 w-4" />
-                humsj@haramaya.edu.et
-              </a>
-              <div className="flex items-center gap-2 text-sm text-primary-foreground/80">
-                <Phone className="h-4 w-4" />
-                +251 912 345 678
+            <div className="flex flex-col gap-4">
+              <div>
+                <p className="text-sm font-semibold text-primary-foreground mb-1">External Affairs Amir</p>
+                <p className="text-sm text-primary-foreground/90 mb-1">Mehadi Jemal</p>
+                <a href="tel:+251938979492" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+                  <Phone className="h-4 w-4" />
+                  +251 938 979 492
+                </a>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-primary-foreground mb-1">General Amir</p>
+                <p className="text-sm text-primary-foreground/90 mb-1">Musab Abdurahman</p>
+                <a href="tel:+251925237453" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+                  <Phone className="h-4 w-4" />
+                  +251 925 237 453
+                </a>
               </div>
               <div className="flex items-center gap-2 text-sm text-primary-foreground/80">
                 <MapPin className="h-4 w-4" />

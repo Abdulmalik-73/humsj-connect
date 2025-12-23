@@ -100,8 +100,8 @@ const Charity = () => {
           <div className="space-y-6">
             {/* Amir Profile */}
             <AmirProfile
-              name="Brother Mustafa Ibrahim"
-              phone="+251 912 345 002"
+              name="Muhajir Mohammed"
+              phone="+251 964 544 620"
               email="charity.amir@humsj.edu.et"
             />
 
