@@ -101,6 +101,27 @@ npm run build
 
 The build output will be in the `dist/` folder.
 
+## Deployment
+
+### Deploy to Render (Recommended)
+
+See **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** for complete step-by-step instructions.
+
+**Quick Steps:**
+1. Create account at https://render.com
+2. Connect your GitHub repository
+3. Configure:
+   - Build Command: `npm install && npm run build`
+   - Publish Directory: `dist`
+4. Click "Create Static Site"
+5. Your site will be live in 3-5 minutes!
+
+### Deploy to Other Platforms
+
+**Vercel**: https://vercel.com  
+**Netlify**: https://netlify.com  
+**GitHub Pages**: Requires additional configuration
+
 ## License
 
 © 2024 HUMSJ External Affairs. All rights reserved.
