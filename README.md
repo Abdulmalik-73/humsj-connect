@@ -1,131 +1,231 @@
-# HUMSJ External Affairs Website
+# HUMSJ Connect - External Affairs Platform
 
-Official website for Haramaya University Muslim Student Jemea (HUMSJ) External Affairs sector.
+A comprehensive web platform for Haramaya University Muslim Students Jemea (HUMSJ) External Affairs sector, managing Qirat, Charity, and Da'wah programs.
 
-## Features
+## 🚀 Features
 
-- **Home Page**: Islamic-themed design with hero section and sector overview
-- **Sector Pages**: Dedicated pages for Qirat, Charity, and Da'wah sectors
-- **Registration System**: Public forms for student registration in each sector
-- **Admin Panel**: Password-protected dashboard to view registrations
-- **Firebase Integration**: Real-time data storage with Firestore
+### User Features
+- **Sector Registration**: Students can register for Qirat, Charity, or Da'wah programs
+- **Charity Fundraising**: 
+  - Sponsor application form
+  - Monthly student donation registration
+- **Sector Information**: Detailed pages for each sector with historical events
 
-## Technology Stack
+### Admin Features
+- **User Management**: View, add, edit, and delete registrations
+- **Sponsor Management**: Track and manage sponsor applications
+- **Donation Management**: Monitor monthly donation commitments
+- **Data Export**: Export all data to CSV format
+- **Real-time Updates**: Live data synchronization with Firebase
 
-- **Frontend**: React 18 + TypeScript + Vite
-- **Styling**: Tailwind CSS + shadcn/ui components
-- **Database**: Firebase Firestore
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Backend**: Firebase Firestore
 - **Routing**: React Router v6
-- **Forms**: React Hook Form + Zod validation
+- **Form Handling**: React Hook Form + Zod validation
+- **State Management**: TanStack Query
 
-## Getting Started
+## 📋 Prerequisites
 
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
+- Node.js 18+ and npm
 - Firebase account
+- Git
 
-### Installation
+## 🔧 Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Abdulmalik-73/humsj-connect.git
+   cd humsj-connect
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Firebase**
+   - Update `src/lib/firebase.ts` with your Firebase config (if needed)
+   - Current project: `humsj-external-affairs`
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+   Visit: `http://localhost:5173`
+
+5. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+## 🔥 Firebase Setup
+
+### Deploy Firestore Rules
+
+**CRITICAL**: Deploy these rules for CRUD operations to work.
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Select project: `humsj-external-affairs`
+3. Navigate to **Firestore Database** → **Rules**
+4. Copy and paste the rules from `firestore.rules`
+5. Click **Publish**
+
+Or use Firebase CLI:
 ```bash
-git clone https://github.com/Abdulmalik-73/humsj-connect123.git
-cd humsj-connect123
+firebase deploy --only firestore:rules
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+### Firestore Collections
 
-3. Start development server:
-```bash
-npm run dev
-```
+- `registrations_qirat` - Qirat sector participants
+- `registrations_charity` - Charity volunteers
+- `registrations_dawa` - Da'wah participants
+- `sponsors` - Sponsor applications
+- `monthlyDonations` - Monthly donation commitments
 
-4. Open http://localhost:8080 in your browser
-
-### Firebase Setup
-
-1. Go to [Firebase Console](https://console.firebase.google.com/project/humsj-external-affairs/firestore/rules)
-2. Copy the rules from `firestore.rules` file
-3. Paste and publish the rules
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── layout/          # Header, Footer
-│   ├── home/            # Homepage sections
-│   ├── dashboard/       # Registration forms
-│   ├── common/          # Reusable components
-│   └── ui/              # shadcn/ui components
-├── pages/
-│   ├── Index.tsx        # Homepage
-│   ├── Qirat.tsx        # Qirat sector
-│   ├── Charity.tsx      # Charity sector
-│   ├── Dawa.tsx         # Da'wah sector
-│   ├── Dashboard.tsx    # Public registration
-│   └── Admin.tsx        # Admin panel
-├── lib/
-│   ├── firebase.ts      # Firebase config
-│   └── utils.ts         # Utility functions
-└── index.css            # Global styles
-```
-
-## Contact Information
-
-### Leadership
-
-- **External Affairs Amir**: Mehadi Jemal - +251 938 979 492
-- **General Amir**: Musab Abdurahman - +251 925 237 453
-
-### Sector Amirs
-
-- **Qirat Sector**: Mohammed Ahmadu - +251 929 230 120
-- **Charity Sector**: Muhajir Mohammed - +251 964 544 620
-- **Da'wah Sector**: Ramadan Aliyii - +251 975 309 779
-
-## Admin Access
+## 🔐 Admin Access
 
 - **URL**: `/admin`
-- **Password**: `humsj2024` (Change before production!)
+- **Password**: `humsj2024` (change in `src/pages/Admin.tsx`)
 
-## Build for Production
+### Admin Capabilities
+- ✅ View all registrations
+- ✅ Add new users manually
+- ✅ Edit user information
+- ✅ Delete users
+- ✅ Manage sponsors (view, update status, delete)
+- ✅ Manage donations (view, update status, delete)
+- ✅ Export data to CSV
 
-```bash
-npm run build
+## 📝 Form Validation Rules
+
+### Name Field
+- Only letters and spaces allowed
+- 2-100 characters
+- ❌ Numbers not allowed
+
+### Department Field
+- Only letters and spaces allowed
+- 2-100 characters
+- ❌ Numbers not allowed
+
+### Student ID Field
+- Any format accepted (letters, numbers, special characters)
+- 1-50 characters
+
+## 🗓️ Historical Timeline
+
+All sector events are dated between **2000-2018 E.C** (Ethiopian Calendar)
+
+### HUMSJ Foundation
+- **1983 E.C** - Haramaya University Muslim Students Jemea established
+
+### Sector Formation
+- **2000-2018 E.C** - Qirat, Charity, and Da'wah sectors formally organized
+
+## 📁 Project Structure
+
+```
+humsj-connect/
+├── src/
+│   ├── components/
+│   │   ├── common/          # Reusable components
+│   │   ├── dashboard/       # Admin & registration components
+│   │   ├── home/            # Homepage components
+│   │   ├── layout/          # Layout components
+│   │   └── ui/              # shadcn/ui components
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utilities & Firebase config
+│   ├── pages/               # Page components
+│   ├── types/               # TypeScript types
+│   └── main.tsx             # App entry point
+├── public/                  # Static assets
+├── firestore.rules          # Firebase security rules
+└── package.json
 ```
 
-The build output will be in the `dist/` folder.
+## 🚀 Deployment
 
-## Deployment
+### Vercel (Recommended)
+```bash
+npm run build
+# Connect to Vercel or upload dist folder
+```
 
-### Deploy to Render (Recommended)
+### Netlify
+```bash
+npm run build
+# Deploy dist folder
+```
 
-See **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** for complete step-by-step instructions.
+### Firebase Hosting
+```bash
+npm run build
+firebase deploy --only hosting
+```
 
-**Quick Steps:**
-1. Create account at https://render.com
-2. Connect your GitHub repository
-3. Configure:
-   - Build Command: `npm install && npm run build`
-   - Publish Directory: `dist`
-4. Click "Create Static Site"
-5. Your site will be live in 3-5 minutes!
+## 🧪 Testing
 
-### Deploy to Other Platforms
+### Test Form Validation
+1. Go to `/dashboard`
+2. Try entering "Ahmed123" in name field → Should show error
+3. Try entering "Computer Science" → Should work ✅
 
-**Vercel**: https://vercel.com  
-**Netlify**: https://netlify.com  
-**GitHub Pages**: Requires additional configuration
+### Test Admin CRUD
+1. Go to `/admin` (password: humsj2024)
+2. Add a user → Should work ✅
+3. Edit a user → Should work ✅
+4. Delete a user → Should work ✅
 
-## License
+## 📄 Available Routes
 
-© 2024 HUMSJ External Affairs. All rights reserved.
+| Route | Description |
+|-------|-------------|
+| `/` | Home page |
+| `/qirat` | Qirat sector information |
+| `/charity` | Charity sector + fundraising |
+| `/dawa` | Da'wah sector information |
+| `/dashboard` | User registration portal |
+| `/admin` | Admin panel (password protected) |
 
-## Location
+## 🔒 Security Notes
 
-Haramaya University, Ethiopia
+Current Firebase rules allow all operations for development. For production:
+1. Implement Firebase Authentication
+2. Add role-based access control
+3. Restrict admin operations to authenticated admins
+4. Enable Firebase App Check
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📞 Contact
+
+- **Project**: HUMSJ External Affairs
+- **Repository**: https://github.com/Abdulmalik-73/humsj-connect
+- **Firebase Project**: humsj-external-affairs
+
+## 📜 License
+
+This project is for HUMSJ (Haramaya University Muslim Students Jemea) use.
+
+## 🙏 Acknowledgments
+
+- HUMSJ Leadership Team
+- External Affairs Sector Members
+- All Contributors
+
+---
+
+**Built with ❤️ for HUMSJ Community**
+
+**Last Updated**: December 24, 2025
