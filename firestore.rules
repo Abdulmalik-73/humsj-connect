@@ -5,32 +5,42 @@ service cloud.firestore {
     
     // Qirat Sector Registrations
     match /registrations_qirat/{document=**} {
-      // Anyone can create (register)
       allow create: if true;
-      // Anyone can read (for now - change in production)
       allow read: if true;
-      // No one can update or delete
-      allow update, delete: if false;
+      allow update: if true;
+      allow delete: if true;
     }
     
     // Charity Sector Registrations
     match /registrations_charity/{document=**} {
-      // Anyone can create (register)
       allow create: if true;
-      // Anyone can read (for now - change in production)
       allow read: if true;
-      // No one can update or delete
-      allow update, delete: if false;
+      allow update: if true;
+      allow delete: if true;
     }
     
     // Da'wah Sector Registrations
     match /registrations_dawa/{document=**} {
-      // Anyone can create (register)
       allow create: if true;
-      // Anyone can read (for now - change in production)
       allow read: if true;
-      // No one can update or delete
-      allow update, delete: if false;
+      allow update: if true;
+      allow delete: if true;
+    }
+    
+    // Sponsors
+    match /sponsors/{document=**} {
+      allow create: if true;
+      allow read: if true;
+      allow update: if true;
+      allow delete: if true;
+    }
+    
+    // Monthly Donations
+    match /monthlyDonations/{document=**} {
+      allow create: if true;
+      allow read: if true;
+      allow update: if true;
+      allow delete: if true;
     }
   }
 }

@@ -88,9 +88,9 @@ const AboutSection = () => {
                   <div className="w-0.5 h-full bg-border" />
                 </div>
                 <div className="pb-6">
-                  <span className="text-sm font-medium text-accent">2010</span>
-                  <h4 className="font-semibold text-foreground">Foundation</h4>
-                  <p className="text-sm text-muted-foreground">External Affairs sector established as part of HUMSJ organizational structure</p>
+                  <span className="text-sm font-medium text-accent">1983 E.C</span>
+                  <h4 className="font-semibold text-foreground">HUMSJ Foundation</h4>
+                  <p className="text-sm text-muted-foreground">Haramaya University Muslim Students Jemea established</p>
                 </div>
               </div>
               
@@ -100,7 +100,7 @@ const AboutSection = () => {
                   <div className="w-0.5 h-full bg-border" />
                 </div>
                 <div className="pb-6">
-                  <span className="text-sm font-medium text-primary">2015</span>
+                  <span className="text-sm font-medium text-primary">2000 - 2018 E.C</span>
                   <h4 className="font-semibold text-foreground">Sub-Sector Formation</h4>
                   <p className="text-sm text-muted-foreground">Qirat, Charity, and Da'wah sectors formally organized</p>
                 </div>
@@ -112,7 +112,7 @@ const AboutSection = () => {
                   <div className="w-0.5 h-full bg-border" />
                 </div>
                 <div className="pb-6">
-                  <span className="text-sm font-medium text-accent">2020</span>
+                  <span className="text-sm font-medium text-accent">2010 - 2018 E.C</span>
                   <h4 className="font-semibold text-foreground">Digital Expansion</h4>
                   <p className="text-sm text-muted-foreground">Online programs and registration systems implemented</p>
                 </div>

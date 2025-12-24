@@ -8,27 +8,27 @@ import quranImage from "@/assets/quran-recitation.jpg";
 
 const timelineEvents = [
   {
-    year: "2015",
+    year: "2000 E.C",
     title: "Qirat Sector Established",
     description: "Formal establishment of the Qirat sector with focus on Tajweed education."
   },
   {
-    year: "2017",
+    year: "2005 E.C",
     title: "First Annual Qirat Competition",
     description: "Launched the inaugural Quran recitation competition with 50+ participants."
   },
   {
-    year: "2019",
+    year: "2010 E.C",
     title: "Hifz Program Introduction",
     description: "Started the memorization program for students committed to preserving the Quran."
   },
   {
-    year: "2021",
+    year: "2015 E.C",
     title: "Online Classes Launch",
     description: "Adapted to digital learning with online Tajweed and Qirat sessions."
   },
   {
-    year: "2023",
+    year: "2018 E.C",
     title: "500+ Students Milestone",
     description: "Celebrated reaching 500 active students in Qirat programs."
   }

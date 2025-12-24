@@ -8,27 +8,27 @@ import dawaImage from "@/assets/dawa-outreach.jpg";
 
 const timelineEvents = [
   {
-    year: "2013",
+    year: "2000 E.C",
     title: "Da'wah Sector Inception",
     description: "Formed to spread Islamic knowledge and engage in interfaith dialogue."
   },
   {
-    year: "2015",
+    year: "2005 E.C",
     title: "New Muslim Support Program",
     description: "Launched mentorship program for new converts to Islam."
   },
   {
-    year: "2017",
+    year: "2010 E.C",
     title: "Campus Awareness Week",
     description: "First annual Islam Awareness Week with lectures and exhibitions."
   },
   {
-    year: "2019",
+    year: "2015 E.C",
     title: "Interfaith Dialogue Initiative",
     description: "Started regular dialogues with other faith communities on campus."
   },
   {
-    year: "2023",
+    year: "2018 E.C",
     title: "Digital Da'wah Launch",
     description: "Expanded outreach through social media and online content."
   }

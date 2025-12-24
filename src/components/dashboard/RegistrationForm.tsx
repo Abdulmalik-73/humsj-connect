@@ -18,10 +18,12 @@ import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, Loader2 } from "lucide-react";
 
 const registrationSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
-  studentId: z.string().trim().min(4, "Student ID is required").max(20),
-  department: z.string().trim().min(2, "Department is required").max(100),
-  phone: z.string().trim().min(10, "Valid phone number required").max(15),
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100)
+    .regex(/^[a-zA-Z\s]+$/, "Name must contain only letters and spaces"),
+  studentId: z.string().trim().min(1, "Student ID is required").max(50),
+  department: z.string().trim().min(2, "Department is required").max(100)
+    .regex(/^[a-zA-Z\s]+$/, "Department must contain only letters and spaces"),
+  phone: z.string().trim().min(10, "Valid phone number required").max(20),
   sectorAnswer: z.string().trim().min(1, "Please select an option"),
 });
 

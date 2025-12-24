@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Heart, Users, Lock, LogOut } from "lucide-react";
+import { BookOpen, Heart, Users, Lock, LogOut, UserPlus, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import DataTable from "@/components/dashboard/DataTable";
+import AddUserDialog from "@/components/dashboard/AddUserDialog";
+import SponsorsTable from "@/components/dashboard/SponsorsTable";
+import DonationsTable from "@/components/dashboard/DonationsTable";
 import { useToast } from "@/hooks/use-toast";
 
 const ADMIN_PASSWORD = "humsj2024"; // Change this to your secure password
@@ -16,6 +19,7 @@ const Admin = () => {
   const [activeTab, setActiveTab] = useState("qirat");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
+  const [showAddUser, setShowAddUser] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -29,7 +33,7 @@ const Admin = () => {
 
   useEffect(() => {
     const sector = searchParams.get("sector");
-    if (sector && ["qirat", "charity", "dawa"].includes(sector)) {
+    if (sector && ["qirat", "charity", "dawa", "sponsors", "donations"].includes(sector)) {
       setActiveTab(sector);
     }
   }, [searchParams]);
@@ -73,7 +77,7 @@ const Admin = () => {
               Admin Login
             </h1>
             <p className="text-muted-foreground text-center mb-6">
-              Enter password to access registration data
+              Enter password to access admin panel
             </p>
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
@@ -107,27 +111,38 @@ const Admin = () => {
               <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
                 Administrative Portal
               </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="gap-2"
-              >
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowAddUser(true)}
+                  className="gap-2"
+                >
+                  <UserPlus className="h-4 w-4" />
+                  Add User
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="gap-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </Button>
+              </div>
             </div>
             <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">
               Admin Dashboard
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              View and manage participant registration data
+              Manage registrations, sponsors, and donations
             </p>
           </div>
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-7xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 h-auto p-1 bg-card shadow-elegant rounded-xl mb-8">
+            <TabsList className="grid w-full grid-cols-5 h-auto p-1 bg-card shadow-elegant rounded-xl mb-8">
               <TabsTrigger
                 value="qirat"
                 className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
@@ -149,6 +164,20 @@ const Admin = () => {
                 <Users className="h-4 w-4" />
                 <span className="hidden sm:inline">Da'wah</span>
               </TabsTrigger>
+              <TabsTrigger
+                value="sponsors"
+                className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
+              >
+                <DollarSign className="h-4 w-4" />
+                <span className="hidden sm:inline">Sponsors</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="donations"
+                className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
+              >
+                <Heart className="h-4 w-4" />
+                <span className="hidden sm:inline">Donations</span>
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="qirat" className="space-y-8">
@@ -162,9 +191,24 @@ const Admin = () => {
             <TabsContent value="dawa" className="space-y-8">
               <DataTable sector="dawa" />
             </TabsContent>
+
+            <TabsContent value="sponsors" className="space-y-8">
+              <SponsorsTable />
+            </TabsContent>
+
+            <TabsContent value="donations" className="space-y-8">
+              <DonationsTable />
+            </TabsContent>
           </Tabs>
         </div>
       </div>
+
+      {/* Add User Dialog */}
+      <AddUserDialog
+        open={showAddUser}
+        onOpenChange={setShowAddUser}
+        currentSector={activeTab === "sponsors" || activeTab === "donations" ? "qirat" : activeTab as "qirat" | "charity" | "dawa"}
+      />
     </Layout>
   );
 };
