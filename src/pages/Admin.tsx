@@ -176,9 +176,6 @@ const Admin = () => {
                 Login
               </Button>
             </form>
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              Default password: humsj2024
-            </p>
           </div>
         </div>
       </Layout>
