@@ -2,10 +2,18 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Heart, Users, Lock, LogOut, UserPlus, DollarSign } from "lucide-react";
+import { BookOpen, Heart, Users, Lock, LogOut, UserPlus, DollarSign, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import DataTable from "@/components/dashboard/DataTable";
 import AddUserDialog from "@/components/dashboard/AddUserDialog";
 import SponsorsTable from "@/components/dashboard/SponsorsTable";
@@ -20,6 +28,12 @@ const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [showAddUser, setShowAddUser] = useState(false);
+  const [showUpdatePassword, setShowUpdatePassword] = useState(false);
+  const [updatePasswordData, setUpdatePasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -61,6 +75,55 @@ const Admin = () => {
     sessionStorage.removeItem("humsj_admin_auth");
     setPassword("");
     navigate("/");
+  };
+
+  const handleUpdatePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate current password
+    if (updatePasswordData.currentPassword !== ADMIN_PASSWORD) {
+      toast({
+        title: "Update Failed",
+        description: "Current password is incorrect",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate new password
+    if (updatePasswordData.newPassword.length < 6) {
+      toast({
+        title: "Update Failed",
+        description: "New password must be at least 6 characters",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate password confirmation
+    if (updatePasswordData.newPassword !== updatePasswordData.confirmPassword) {
+      toast({
+        title: "Update Failed",
+        description: "New passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Show success message with instructions
+    toast({
+      title: "Password Update Instructions",
+      description: `To complete the update, change ADMIN_PASSWORD in src/pages/Admin.tsx to: "${updatePasswordData.newPassword}"`,
+      duration: 10000,
+    });
+
+    // Reset form and close dialog
+    setUpdatePasswordData({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
+    setShowUpdatePassword(false);
   };
 
   if (!isAuthenticated) {
@@ -120,6 +183,15 @@ const Admin = () => {
                 >
                   <UserPlus className="h-4 w-4" />
                   Add User
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowUpdatePassword(true)}
+                  className="gap-2"
+                >
+                  <KeyRound className="h-4 w-4" />
+                  Update Login
                 </Button>
                 <Button
                   variant="outline"
@@ -209,6 +281,99 @@ const Admin = () => {
         onOpenChange={setShowAddUser}
         currentSector={activeTab === "sponsors" || activeTab === "donations" ? "qirat" : activeTab as "qirat" | "charity" | "dawa"}
       />
+
+      {/* Update Password Dialog */}
+      <Dialog open={showUpdatePassword} onOpenChange={setShowUpdatePassword}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Update Admin Password</DialogTitle>
+            <DialogDescription>
+              Change your admin login password. You'll need to update the code after this.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleUpdatePassword} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="current-password">Current Password *</Label>
+              <Input
+                id="current-password"
+                type="password"
+                value={updatePasswordData.currentPassword}
+                onChange={(e) =>
+                  setUpdatePasswordData({
+                    ...updatePasswordData,
+                    currentPassword: e.target.value,
+                  })
+                }
+                placeholder="Enter current password"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="new-password">New Password *</Label>
+              <Input
+                id="new-password"
+                type="password"
+                value={updatePasswordData.newPassword}
+                onChange={(e) =>
+                  setUpdatePasswordData({
+                    ...updatePasswordData,
+                    newPassword: e.target.value,
+                  })
+                }
+                placeholder="Enter new password (min 6 characters)"
+                required
+                minLength={6}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirm-password">Confirm New Password *</Label>
+              <Input
+                id="confirm-password"
+                type="password"
+                value={updatePasswordData.confirmPassword}
+                onChange={(e) =>
+                  setUpdatePasswordData({
+                    ...updatePasswordData,
+                    confirmPassword: e.target.value,
+                  })
+                }
+                placeholder="Confirm new password"
+                required
+              />
+            </div>
+
+            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
+                <strong>Note:</strong> After updating, you'll need to change the password in the code file:{" "}
+                <code className="bg-secondary px-2 py-1 rounded text-xs">
+                  src/pages/Admin.tsx
+                </code>
+              </p>
+            </div>
+
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  setShowUpdatePassword(false);
+                  setUpdatePasswordData({
+                    currentPassword: "",
+                    newPassword: "",
+                    confirmPassword: "",
+                  });
+                }}
+              >
+                Cancel
+              </Button>
+              <Button type="submit">Update Password</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
