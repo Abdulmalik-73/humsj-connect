@@ -14,24 +14,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import DataTable from "@/components/dashboard/DataTable";
 import AddUserDialog from "@/components/dashboard/AddUserDialog";
 import SponsorsTable from "@/components/dashboard/SponsorsTable";
 import DonationsTable from "@/components/dashboard/DonationsTable";
 import { useToast } from "@/hooks/use-toast";
 
-// Default password - will be overridden by localStorage if changed
+// Default password
 const DEFAULT_PASSWORD = "humsj2024";
-
-// Get admin password from localStorage or use default
-const getAdminPassword = () => {
-  return localStorage.getItem("humsj_admin_password") || DEFAULT_PASSWORD;
-};
-
-// Set admin password in localStorage
-const setAdminPassword = (newPassword: string) => {
-  localStorage.setItem("humsj_admin_password", newPassword);
-};
 
 const Admin = () => {
   const [searchParams] = useSearchParams();
@@ -40,6 +32,8 @@ const Admin = () => {
   const [password, setPassword] = useState("");
   const [showAddUser, setShowAddUser] = useState(false);
   const [showUpdatePassword, setShowUpdatePassword] = useState(false);
+  const [adminPassword, setAdminPassword] = useState(DEFAULT_PASSWORD);
+  const [loadingPassword, setLoadingPassword] = useState(true);
   const [updatePasswordData, setUpdatePasswordData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -47,6 +41,31 @@ const Admin = () => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Load admin password from Firebase on component mount
+  useEffect(() => {
+    const loadAdminPassword = async () => {
+      try {
+        const docRef = doc(db, "admin_settings", "password");
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          setAdminPassword(docSnap.data().password);
+        } else {
+          // Initialize with default password if doesn't exist
+          await setDoc(docRef, { password: DEFAULT_PASSWORD });
+          setAdminPassword(DEFAULT_PASSWORD);
+        }
+      } catch (error) {
+        console.error("Error loading admin password:", error);
+        setAdminPassword(DEFAULT_PASSWORD);
+      } finally {
+        setLoadingPassword(false);
+      }
+    };
+
+    loadAdminPassword();
+  }, []);
 
   useEffect(() => {
     // Check if already authenticated
@@ -65,9 +84,8 @@ const Admin = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const currentPassword = getAdminPassword();
     
-    if (password === currentPassword) {
+    if (password === adminPassword) {
       setIsAuthenticated(true);
       sessionStorage.setItem("humsj_admin_auth", "true");
       toast({
@@ -91,13 +109,11 @@ const Admin = () => {
     navigate("/");
   };
 
-  const handleUpdatePassword = (e: React.FormEvent) => {
+  const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const currentPassword = getAdminPassword();
-
     // Validate current password
-    if (updatePasswordData.currentPassword !== currentPassword) {
+    if (updatePasswordData.currentPassword !== adminPassword) {
       toast({
         title: "Update Failed",
         description: "Current password is incorrect",
@@ -126,23 +142,51 @@ const Admin = () => {
       return;
     }
 
-    // Update password in localStorage
-    setAdminPassword(updatePasswordData.newPassword);
+    try {
+      // Update password in Firebase
+      const docRef = doc(db, "admin_settings", "password");
+      await setDoc(docRef, { password: updatePasswordData.newPassword });
+      
+      // Update local state
+      setAdminPassword(updatePasswordData.newPassword);
 
-    // Show success message
-    toast({
-      title: "Password Updated Successfully!",
-      description: "Your admin password has been changed. Use the new password for your next login.",
-    });
+      // Show success message
+      toast({
+        title: "Password Updated Successfully!",
+        description: "Your admin password has been changed and saved to the database.",
+      });
 
-    // Reset form and close dialog
-    setUpdatePasswordData({
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
-    setShowUpdatePassword(false);
+      // Reset form and close dialog
+      setUpdatePasswordData({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      setShowUpdatePassword(false);
+    } catch (error) {
+      console.error("Error updating password:", error);
+      toast({
+        title: "Update Failed",
+        description: "Failed to save password to database. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
+
+  if (loadingPassword) {
+    return (
+      <Layout>
+        <div className="min-h-screen bg-secondary/30 islamic-pattern flex items-center justify-center px-4">
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <Lock className="h-8 w-8 text-primary animate-pulse" />
+            </div>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -306,7 +350,7 @@ const Admin = () => {
           <DialogHeader>
             <DialogTitle>Update Admin Password</DialogTitle>
             <DialogDescription>
-              Change your admin login password. The new password will be saved automatically.
+              Change your admin login password. The new password will be saved to the database.
             </DialogDescription>
           </DialogHeader>
 
@@ -365,8 +409,7 @@ const Admin = () => {
 
             <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
               <p className="text-sm text-foreground">
-                <strong>✅ Automatic Update:</strong> Your new password will be saved automatically. 
-                No code changes needed!
+                <strong>🔒 Database Storage:</strong> Your new password will be saved to Firebase and will persist across all deployments and devices.
               </p>
             </div>
 

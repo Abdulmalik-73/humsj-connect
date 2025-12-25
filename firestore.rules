@@ -42,5 +42,11 @@ service cloud.firestore {
       allow update: if true;
       allow delete: if true;
     }
+    
+    // Admin Settings (for password storage)
+    match /admin_settings/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
   }
 }
