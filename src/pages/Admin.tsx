@@ -20,7 +20,18 @@ import SponsorsTable from "@/components/dashboard/SponsorsTable";
 import DonationsTable from "@/components/dashboard/DonationsTable";
 import { useToast } from "@/hooks/use-toast";
 
-const ADMIN_PASSWORD = "humsj2024"; // Change this to your secure password
+// Default password - will be overridden by localStorage if changed
+const DEFAULT_PASSWORD = "humsj2024";
+
+// Get admin password from localStorage or use default
+const getAdminPassword = () => {
+  return localStorage.getItem("humsj_admin_password") || DEFAULT_PASSWORD;
+};
+
+// Set admin password in localStorage
+const setAdminPassword = (newPassword: string) => {
+  localStorage.setItem("humsj_admin_password", newPassword);
+};
 
 const Admin = () => {
   const [searchParams] = useSearchParams();
@@ -54,13 +65,16 @@ const Admin = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
+    const currentPassword = getAdminPassword();
+    
+    if (password === currentPassword) {
       setIsAuthenticated(true);
       sessionStorage.setItem("humsj_admin_auth", "true");
       toast({
         title: "Login Successful",
         description: "Welcome to the admin panel",
       });
+      setPassword("");
     } else {
       toast({
         title: "Login Failed",
@@ -80,8 +94,10 @@ const Admin = () => {
   const handleUpdatePassword = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const currentPassword = getAdminPassword();
+
     // Validate current password
-    if (updatePasswordData.currentPassword !== ADMIN_PASSWORD) {
+    if (updatePasswordData.currentPassword !== currentPassword) {
       toast({
         title: "Update Failed",
         description: "Current password is incorrect",
@@ -110,11 +126,13 @@ const Admin = () => {
       return;
     }
 
-    // Show success message with instructions
+    // Update password in localStorage
+    setAdminPassword(updatePasswordData.newPassword);
+
+    // Show success message
     toast({
-      title: "Password Update Instructions",
-      description: `To complete the update, change ADMIN_PASSWORD in src/pages/Admin.tsx to: "${updatePasswordData.newPassword}"`,
-      duration: 10000,
+      title: "Password Updated Successfully!",
+      description: "Your admin password has been changed. Use the new password for your next login.",
     });
 
     // Reset form and close dialog
@@ -158,6 +176,9 @@ const Admin = () => {
                 Login
               </Button>
             </form>
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Default password: humsj2024
+            </p>
           </div>
         </div>
       </Layout>
@@ -288,7 +309,7 @@ const Admin = () => {
           <DialogHeader>
             <DialogTitle>Update Admin Password</DialogTitle>
             <DialogDescription>
-              Change your admin login password. You'll need to update the code after this.
+              Change your admin login password. The new password will be saved automatically.
             </DialogDescription>
           </DialogHeader>
 
@@ -345,12 +366,10 @@ const Admin = () => {
               />
             </div>
 
-            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-              <p className="text-sm text-muted-foreground">
-                <strong>Note:</strong> After updating, you'll need to change the password in the code file:{" "}
-                <code className="bg-secondary px-2 py-1 rounded text-xs">
-                  src/pages/Admin.tsx
-                </code>
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+              <p className="text-sm text-foreground">
+                <strong>✅ Automatic Update:</strong> Your new password will be saved automatically. 
+                No code changes needed!
               </p>
             </div>
 
